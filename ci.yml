@@ -1,0 +1,31 @@
+# .github/workflows/ci.yml
+# Este arquivo deve ser colocado na pasta .github/workflows/ do repositorio
+ 
+name: CI - Validar HTML
+ 
+# Quando executar: a cada push ou pull request na branch main
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+ 
+jobs:
+  testar-html:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      # 1. Baixar o codigo do repositorio
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+ 
+      # 2. Configurar o Python
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+ 
+      # 3. Executar os testes
+      - name: Rodar testes do HTML
+        run: python test_html.py
+ 
